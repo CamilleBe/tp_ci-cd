@@ -1,0 +1,11 @@
+{
+  "nom": "NOM",
+  "prenom": "Prénom",
+  "promo": "EPSI M1",
+  "secret": "mon secret",
+  "hobbies": [
+    "Intégration continue",
+    "MMA",
+    "Comics"
+  ]
+}
