@@ -55,10 +55,8 @@ pipeline {
 
         stage('Packaging') {
             steps {
-                dir('app-test') {
-                    sh 'tar -czf app-test-build.tar.gz -C dist .'
-                    archiveArtifacts artifacts: 'app-test-build.tar.gz', fingerprint: true
-                }
+                sh 'tar -czf app-test-build.tar.gz -C dist .'
+                archiveArtifacts artifacts: 'app-test-build.tar.gz', fingerprint: true
             }
         }
     }
