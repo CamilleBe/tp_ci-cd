@@ -29,6 +29,13 @@ pipeline {
         stage('Test') {
             steps {
                 dir('app-test') {
+                    sh 'npm install --save-dev puppeteer'
+                    script {
+                        env.CHROME_BIN = sh(
+                            script: "node -e \"console.log(require('puppeteer').executablePath())\"",
+                            returnStdout: true
+                        ).trim()
+                    }
                     sh 'npm test -- --watch=false --browsers=ChromeHeadless --code-coverage'
                 }
             }
