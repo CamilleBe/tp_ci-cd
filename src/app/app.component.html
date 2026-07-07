@@ -1,40 +1,31 @@
-@if (studentInformation) {
-  <div>
-    <p>Bonjour {{studentInformation.prenom}} {{studentInformation.nom}} de la promotion {{studentInformation.promo}}</p>
-    <strong>Merci de m'avoir deployé avec succès ❤</strong>
-    @if (studentInformation.secret != null) {
-      <p>
-        Ne dite rien mais mon secret est
-        @if (!showSecret) {
-          <span style="cursor: pointer; color: red; text-decoration: underline"
-          (click)="showSecret = true">(show)</span>
-        }
-        @if (showSecret) {
-          <span style="cursor: pointer; color: red; text-decoration: underline"
-          (click)="showSecret = false">(hide)</span>
-          }:
-          @if (showSecret) {
-            <strong>{{studentInformation.secret}}</strong>
-          }
-        </p>
-      }
-      @if (studentInformation.hobbies != null) {
-        <div>
-          Mes hobbies sont :
-          <ul>
-            @for (hobby of studentInformation.hobbies; track hobby) {
-              <li> {{hobby}}</li>
-            }
-          </ul>
-        </div>
-      }
-    </div>
-  }
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
-  @if (studentInformation === null) {
-    <div>
-      <p>Bonjour inconnu</p>
-      <strong>Le deploiement n'a pas bien fonctionné !! </strong>
-      <p>Il me manque tes informations pour te connaitre et te remercier 💔 </p>
-    </div>
-  }
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'app-test'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('app-test');
+  });
+
+  it('should render fallback message when no student information', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Bonjour inconnu');
+  });
+});
