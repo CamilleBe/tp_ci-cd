@@ -36,7 +36,7 @@ pipeline {
                             returnStdout: true
                         ).trim()
                     }
-                    sh 'npm test -- --watch=false --browsers=ChromeHeadless --code-coverage'
+                    sh 'npm test -- --watch=false --browsers=ChromeHeadlessCI --code-coverage'
                 }
             }
         }
