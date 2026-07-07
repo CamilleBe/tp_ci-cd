@@ -45,15 +45,17 @@ pipeline {
             steps {
                 dir('app-test') {
                     withSonarQubeEnv('SonarCloud') {
-                        sh """
-                            ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                              -Dsonar.organization=camille-epsi \
-                              -Dsonar.projectKey=CamilleBe_tp_ci-cd \
-                              -Dsonar.sources=src \
-                              -Dsonar.tests=src \
-                              -Dsonar.test.inclusions=**/*.spec.ts \
-                              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                        """
+                        withEnv(["SONAR_SCANNER_OPTS=-Djavax.net.ssl.trustStoreType=jks"]) {
+                            sh """
+                                ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                                -Dsonar.organization=camille-epsi \
+                                -Dsonar.projectKey=CamilleBe_tp_ci-cd \
+                                -Dsonar.sources=src \
+                                -Dsonar.tests=src \
+                                -Dsonar.test.inclusions=**/*.spec.ts \
+                                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                            """
+                        }
                     }
                 }
             }
