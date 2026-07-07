@@ -51,8 +51,7 @@ pipeline {
                                 -Dsonar.organization=camille-epsi \
                                 -Dsonar.projectKey=CamilleBe_tp_ci-cd \
                                 -Dsonar.sources=src \
-                                -Dsonar.tests=src \
-                                -Dsonar.test.inclusions=**/*.spec.ts \
+                                -Dsonar.exclusions=**/*.spec.ts \
                                 -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                             """
                         }
