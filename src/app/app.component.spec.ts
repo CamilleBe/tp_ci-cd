@@ -22,10 +22,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('app-test');
   });
 
-  it('should render title', () => {
+  it('should render fallback message when no student information', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('app-test app is running!');
+    expect(compiled.textContent).toContain('Bonjour inconnu');
   });
 });
