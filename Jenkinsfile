@@ -46,14 +46,7 @@ pipeline {
                 dir('app-test') {
                     withSonarQubeEnv('SonarCloud') {
                         withEnv(["SONAR_SCANNER_OPTS=-Djavax.net.ssl.trustStoreType=jks"]) {
-                            sh """
-                                ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                                -Dsonar.organization=camille-epsi \
-                                -Dsonar.projectKey=CamilleBe_tp_ci-cd \
-                                -Dsonar.sources=src \
-                                -Dsonar.exclusions=**/*.spec.ts \
-                                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                            """
+                            sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner -Dsonar.organization=camille-epsi -Dsonar.projectKey=CamilleBe_tp_ci-cd -Dsonar.projectBaseDir=\$(pwd) -Dsonar.sources=. -Dsonar.exclusions=**/*.spec.ts,**/node_modules/** -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info"
                         }
                     }
                 }
